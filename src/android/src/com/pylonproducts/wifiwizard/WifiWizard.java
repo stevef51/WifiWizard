@@ -4,7 +4,7 @@
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *  Unless required by applicable law or agreed to in writing, software
  *  distributed under the License is distributed on an "AS IS" BASIS,
@@ -53,7 +53,7 @@ public class WifiWizard extends CordovaPlugin {
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        this.wifiManager = (WifiManager) cordova.getActivity().getSystemService(Context.WIFI_SERVICE);
+        this.wifiManager = (WifiManager) cordova.getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
     }
 
     @Override
@@ -531,9 +531,9 @@ public class WifiWizard extends CordovaPlugin {
             Log.d(TAG, "WifiWizard: disconnectNetwork invalid data");
             return false;
         }
-        
+
         String status = "";
-        
+
         try {
             status = data.getString(0);
         }
@@ -542,11 +542,11 @@ public class WifiWizard extends CordovaPlugin {
             Log.d(TAG, e.getMessage());
             return false;
         }
-        
+
         if (wifiManager.setWifiEnabled(status.equals("true"))) {
             callbackContext.success();
             return true;
-        } 
+        }
         else {
             callbackContext.error("Cannot enable wifi");
             return false;
